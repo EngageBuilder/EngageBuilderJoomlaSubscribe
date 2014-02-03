@@ -1,0 +1,18 @@
+.icon-48-getting-started {
+    background-image: url(../images/default_widget.png);
+}
+.pagetitle.icon-48-getting-started h2 { line-height: 65px; margin: 0 0  0 35px;}
+
+.eb_admin_fields textarea { width: 100%;}
+.eb_admin_fields td {
+    vertical-align: top;
+    width: 290px;
+    padding-bottom: 5px;
+}
+.eb_admin_fields input { padding: 4px 5px 4px 5px;}
+#eb-signup { margin-top: 30px;}
+.eb_admin_fields #apikey { padding: 5px 6px; }
+.eb_admin_fields #apikey.empty { border-color: #ff2f33;}
+#eb-save { font-size: 16px; font-weight: bold; padding: 5px 10px; margin-top: 20px; display: inline-table;}
+#css-route {   text-align: left; display: inline-table;width: 500px;}
+.eb-admin-error { color: #ff2f33;}

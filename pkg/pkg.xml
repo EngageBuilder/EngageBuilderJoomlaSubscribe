@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <extension type="package" version="2.5">
+ <name>Engagebuilder Signup Package</name>
+ <author>Alberto Perez</author>
+ <authorEmail>alberto2perez@gmail.com</authorEmail>
+ <creationDate>Jan, 2014</creationDate>
+ <packagename>EngagebuilderSignup</packagename>
+ <version>1.0.0</version>
+ <url>http://www.engagebuilder.com/</url>
+ <packager>Alberto Perez</packager>
+ <description>Add subscribers to your Engagebuilder list from your websites.</description>
+ <files folder="packages">
+   <file type="component" id="engagebuildersignup" >com_engagebuildersignup.zip</file>
+   <file type="module" id="engagebuildersignup" client="site">mod_engagebuildersignup.zip</file>
+ </files>
+ </extension>

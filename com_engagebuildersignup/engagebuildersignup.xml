@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id: engagebuilder.xml 51 2010-11-22 01:33:21Z chdemko $ -->
+<extension type="component" version="1.6.0" method="upgrade">
+
+	<name>EngageBuilder Signup</name>
+	<!-- The following elements are optional and free of formatting conttraints -->
+	<creationDate>January 2014</creationDate>
+	<author>Alberto Perez</author>
+	<authorEmail>alberto2perez@gmail.com</authorEmail>
+	<authorUrl>http://www.engagebuilder.com</authorUrl>
+	<copyright>Engagebuilder.com</copyright>
+	<license></license>
+	<!--  The version string is recorded in the components table -->
+	<version>0.1</version>
+	<!-- The description is optional and defaults to the name -->
+	<description>Add subscribers to your Engagebuilder list from your websites.</description>
+
+	<!--<update> &lt;!&ndash; Runs on update; New in 1.6 &ndash;&gt;-->
+		<!--<schemas>-->
+			<!--<schemapath type="mysql">sql/updates/mysql</schemapath>-->
+		<!--</schemas>-->
+	<!--</update>-->
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+
+	<!-- Site Main File Copy Section -->
+	<!-- Note the folder attribute: This attribute describes the folder
+		to copy FROM in the package to install therefore files copied
+		in this section are copied from /site/ in the package -->
+	<administration>
+		<!-- Administration Menu Section -->
+		<menu>EngageBuilder Subscriber Signup</menu>
+		<!-- Administration Main File Copy Section -->
+		<!-- Note the folder attribute: This attribute describes the folder
+			to copy FROM in the package to install therefore files copied
+			in this section are copied from /admin/ in the package -->
+		<files folder="admin">
+			<!-- Admin Main File Copy Section -->
+			<filename>index.html</filename>
+			<filename>engagebuildersignup.php</filename>
+			<filename>controller.php</filename>
+			<filename>access.xml</filename>
+			<!-- SQL files section -->
+			<folder>sql</folder>
+			<folder>ebSdk</folder>
+			<folder>css</folder>
+			<folder>views</folder>
+			<folder>js</folder>
+			<folder>images</folder>
+		</files>
+        
+	</administration>
+
+</extension>
+

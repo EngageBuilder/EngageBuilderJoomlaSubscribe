@@ -1,0 +1,94 @@
+<?php
+class EbSDK {
+    protected $config = array(
+        'url'=>'http://er.com/+/api',
+        'apiKey'=>''
+    );
+
+    public function __construct($apiKey){
+        #pre-checks
+        function_exists('curl_version') or die('CURL support required');
+        function_exists('json_encode') or die('JSON support required');
+
+        $this->config['apiKey'] = $apiKey;
+    }
+
+    protected function execute($cmd, $data = array()){
+        #set timeout
+        set_time_limit(30);
+
+        $ch = curl_init();
+        #curl post
+        curl_setopt($ch, CURLOPT_URL, $this->config['url'].'/'.$cmd);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_USERAGENT, 'EngageBuilder LLC API Client v1.0');
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:', 'X-API-Key: '.$this->config['apiKey']));
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+        $result=curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return array('result'=>$result, 'code'=>$code);
+    }
+
+    public function validateKey(){
+        $cmd = 'validate';
+        $data = array(
+          'apiKey'=>$this->config['apiKey']
+        );
+
+        $validation = $this->execute($cmd, $data);
+
+        if ($validation['code'] != 201 )
+            return false;
+
+        return true;
+    }
+
+
+
+    public function getOnDemandCampaignList(){
+        $cmd = 'getOnDemandCampaignList';
+
+        $campaignList = $this->execute($cmd);
+
+        if ($campaignList['code']!= 201){
+            return false;
+        }
+        return json_decode($campaignList['result'], true); // return array of campaigns id=>name
+    }
+
+    public function triggerCampaign($campaignId, $subscriberId){
+        $data = array(
+            'campaign_id' => $campaignId,
+            'subscriber_id' => $subscriberId
+        );
+        $cmd = 'triggerCampaign';
+        $trigger = $this->execute($cmd, $data);
+        if ($trigger['code']!=201)
+            return false;
+        else
+            return (int) $trigger['result']; // returns the campaign sent code id
+    }
+
+    public function createSubscriber($firstName = null, $lastName = null, $phone = null, $email = null, $zipCode = null, $dob = null, $extraFields=array()){
+        $data = array(
+            'first_name'=>$firstName,
+            'last_name'=>$lastName,
+            'email'=>$email,
+            'phone'=>$phone,
+            'zip_code'=>$zipCode,
+            'dob'=>$dob,
+            'extra_fields'=>$extraFields
+        );
+        $subscriber = $this->execute('createSubscriber', $data);
+        if ($subscriber['code']!=201)
+            return false;
+        else
+            return (int) $subscriber['result']; // returns the Subscriber id
+    }
+}

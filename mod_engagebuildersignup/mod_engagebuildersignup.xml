@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5.0" client="site" method="upgrade">
+    <name>Engagebuilder Subscriber Signup</name>
+    <author>Alberto Perez</author>
+    <authorEmail>alberto2perez@gmail.com</authorEmail>
+    <version>1.0.0</version>
+    <description>Add subscribers to your Engagebuilder list from your websites.</description>
+    <files>
+        <filename>mod_engagebuildersignup.xml</filename>
+        <filename module="mod_engagebuildersignup">mod_engagebuildersignup.php</filename>
+        <folder>css</folder>
+        <folder>js</folder>
+    </files>
+    <config>
+    </config>
+</extension>
